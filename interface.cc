@@ -35,11 +35,11 @@ void user_error() {				// Error function for user input
 
 int main() {
 	char operation;
-	int8_t x, y;
+	int8_t a, b;
 	map<char, int8_t> variable;
 	string str;
 	char var_name, equal;
-	Normal a, b;
+	Normal x, y;
 	
 	while(true) {
 
@@ -56,37 +56,26 @@ int main() {
 				if ( equal != '=' ) user_error(); // If no '=', run ERROR
 				variable[var_name] = x;
 			}
+			else if ( str == "QUIT" ) exit(0); 	// Case 3:  User enters QUIT
+
 			else if ( str.size() == 1 && isalpha(str.at(0)) ) { 	// Case 2:  Writing algebraic expression, starting with a variable
 				// First, set a char to str.at(0) 
 				// Then, search the map for the char
+				// If the char doesn't exit, run user_error();
 				// Set Number x.set_value( map[char] );
 			}
 		}
-		else if ( isdigit(input.at(0) ) {
-			cin >> x;
+		
+		else if ( isdigit(input.at(0) ) { 		// Case 2:  Writing algebraic expression, starting with a number
+				cin >> a;
+				if ( a > 255 ) user_error();  // If value entered is above 255, run ERROR
+				// Number x.set_value(a);
 		}
-		// Case 3:  Quit
+			else user_error(); // If none of the above, run ERROR
 		
-/*		cin >> x >> operation >> y;
-		if ( x > 255 || y >> 255 ) user_error();			// If Normal x or Normal y are given to be greater than 255, run ERROR
-		if (!cin) user_error();								// If invalid input, run ERROR
-		if (!isdigit(x) || !isdigit(y)) user_error(); 		// If digit for x or y is not given, run ERROR 
-		if ( cin == EOF ) user_error();  					// If file ends early, run ERROR	
-		if ( operation != '+' && operation != '-' && operation != '*' && operation != '/' && operation != '%' ) 
-				user_error(); 								// If no operation given, run ERROR
-		
-		if ( x == 'q' ) break; 								// If quit command given, break out of loop
-		
-		else{												// This is me, guessing about how the operations work :S		
-			if ( operation == '+' ) z = add(x, y);
-			else if ( operation == '-' ) z = subtract(x, y);
-			else if ( operation == '*' ) z = multiply(x, y);
-			else if ( operation == '/' ) z = divide(x, y);
-			else if ( operation == '%' ) z = modulus(x, y);
-			cout << z << endl;
-		}
 	}
-*/
+
 	return 0;
 }
 
+# csci41_calc
