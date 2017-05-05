@@ -16,7 +16,7 @@ class Normal {
 			value = new_value; }
 };
 		
-class Variable::public Normal {
+/* class Variable::public Normal {
 	private:
 		int8_t var_val;
 	public:
@@ -26,7 +26,7 @@ class Variable::public Normal {
 			return fake_value;
 		}
 		void set_value( int8_t new_var ) { var_val = new_var; }
-};
+}; */
 
 void user_error() {				// Error function for user input
 	cout << "BAD INPUT\n";
@@ -51,10 +51,10 @@ int main() {
 			cin >> str;					// Write to string
 			if (!cin) user_error();		
 			if ( str == "LET" ) {	 	// Case 1:  Writing a variable
-				cin >> var_name >> equal >> x;
+				cin >> var_name >> equal >> a;
 				if (!cin) user_error();
 				if ( equal != '=' ) user_error(); // If no '=', run ERROR
-				variable[var_name] = x;
+				variable[var_name] = a;
 			}
 			else if ( str == "QUIT" ) exit(0); 	// Case 3:  User enters QUIT
 
