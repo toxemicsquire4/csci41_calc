@@ -11,9 +11,9 @@ class Normal {
 		int value;
 	public:
 		int get_value() { return value; }
-		void set_value( int new_value ) { i
-			if ( new_value > 255 ) throw_runtime_error("BAD INPUT");
-			value = new_value; }
+		void set_value( int new_value ) { 
+			value = new_value; 
+		}
 };
 		
 /* class Variable::public Normal {
@@ -36,22 +36,41 @@ void user_error() {				// Error function for user input
 int main() {
 	char operation;
 	int8_t a, b;
+	
 	map<char, int8_t> variable;
 	string str;
 	char var_name, equal;
-	Normal x, y;
+	Normal x, y, z;
 	
 	while(true) {
+		cin >> ws; // Eats whitespace
 
-		// Case 1:  Set Variables
-		// Will require a data structure to keep track of variables + values
 		char input = cin.peek();
 
-		if ( isalpha(input) ) { 		// If user inputs a letter
+		if ( input == '+' || input == '-' || input == '*' || input == '/' || input == '%' || input == '^' ) { // Continuation of algebra
+			cin >> operation;
+			cin >> ws;
+			char input = cin.peek();
+			if ( isalpha(input) ) {
+				cin >> var_name;
+				auto search = variable.find(var_name);		// Search map for char
+				if ( search != variable.end() ) user_error();	// If char doesn't exist, run ERROR
+				else  y.set_value( map[var_name] );		// Otherwise, set Number y to value of char
+				
+			else if ( isdigit(input) ) {	
+				cin >> b;
+				if ( b > 255 ) throw_runtime_error("BAD INPUT");	// If input is over 255, run ERROR
+				y.set_value(b);
+			}
+			if ( operation == '+' ) { x.set_value(multiply(x, y)); }
+			if ( cin.eof() ) cout << x.get_value();		// If end of user input, output answer
+		}
+		else if ( isalpha(input) ) { 		// If user inputs a letter
 			cin >> str;					// Write to string
 			if (!cin) user_error();		
 			if ( str == "LET" ) {	 	// Case 1:  Writing a variable
 				cin >> var_name >> equal >> a;
+				if ( a > 255 ) throw_runtime_error("BAD INPUT");
 				if (!cin) user_error();
 				if ( equal != '=' ) user_error(); // If no '=', run ERROR
 				variable[var_name] = a;
@@ -59,19 +78,21 @@ int main() {
 			else if ( str == "QUIT" ) exit(0); 	// Case 3:  User enters QUIT
 
 			else if ( str.size() == 1 && isalpha(str.at(0)) ) { 	// Case 2:  Writing algebraic expression, starting with a variable
-				// First, set a char to str.at(0) 
-				// Then, search the map for the char
-				// If the char doesn't exit, run user_error();
-				// Set Number x.set_value( map[char] );
+				char var = str.at(0);		// Set char to single char of str
+				auto search = variable.find(var);	// Search map for char
+				if ( search != variable.end() ) user_error();	// If char doesn't exist, run ERROR
+				else  x.set_value( map[var] );		// Otherwise, set Number x to value of char
 			}
+			else user_error();
 		}
 		
 		else if ( isdigit(input.at(0) ) { 		// Case 2:  Writing algebraic expression, starting with a number
 				cin >> a;
-				if ( a > 255 ) user_error();  // If value entered is above 255, run ERROR
-				// Number x.set_value(a);
+				if ( a > 255 ) throw_runtime_error("BAD INPUT");
+				x.set_value(a);
 		}
-			else user_error(); // If none of the above, run ERROR
+		
+		else user_error(); 
 		
 	}
 
