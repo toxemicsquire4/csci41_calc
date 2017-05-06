@@ -14,6 +14,7 @@ using namespace std;
     return 0;
 }*/
 
+//This is the working code, or it should be
 float division(Normal& x, Normal& y){
     if (y.get_value() == 0) user_error();
     float result = x.get_value()/y.get_value();
