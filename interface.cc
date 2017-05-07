@@ -3,6 +3,7 @@
 #include <exception>
 #include <stdexcept>
 #include <string>
+#include <ctype.h>
 
 using namespace std;
 
@@ -46,24 +47,30 @@ int main() {
 		cin >> ws; // Eats whitespace
 
 		char input = cin.peek();
-
+		
 		if ( input == '+' || input == '-' || input == '*' || input == '/' || input == '%' || input == '^' ) { // Continuation of algebra
-			cin >> operation;
-			cin >> ws;
-			char input = cin.peek();
-			if ( isalpha(input) ) {
-				cin >> var_name;
-				auto search = variable.find(var_name);		// Search map for char
-				if ( search != variable.end() ) user_error();	// If char doesn't exist, run ERROR
-				else  y.set_value( map[var_name] );		// Otherwise, set Number y to value of char
-				
-			else if ( isdigit(input) ) {	
-				cin >> b;
-				if ( b > 255 ) throw_runtime_error("BAD INPUT");	// If input is over 255, run ERROR
-				y.set_value(b);
+			while ( true ) {
+				cin >> operation;
+				cin >> ws;
+				char input = cin.peek();
+				if ( isalpha(input) ) {
+					cin >> var_name;
+					auto search = variable.find(var_name);		// Search map for char
+					if ( search == variable.end() ) user_error();	// If char doesn't exist, run ERROR
+					else  y.set_value( variable[var_name] );		// Otherwise, set Number y to value of char
+				}
+			
+				else if ( isdigit(input) ) {	
+					cin >> b;
+					if ( b > 255 ) throw_runtime_error("BAD INPUT");	// If input is over 255, run ERROR
+					y.set_vvalue(b);
+				}
+				if ( operation == '+' ) { x.set_value(multiply(x, y)); }
+				if ( operation == '=' ) {
+					cout << x.get_value() << endl;
+					break
+				}	// If end of user input, output answer
 			}
-			if ( operation == '+' ) { x.set_value(multiply(x, y)); }
-			if ( cin.eof() ) cout << x.get_value();		// If end of user input, output answer
 		}
 		else if ( isalpha(input) ) { 		// If user inputs a letter
 			cin >> str;					// Write to string
@@ -77,16 +84,16 @@ int main() {
 			}
 			else if ( str == "QUIT" ) exit(0); 	// Case 3:  User enters QUIT
 
-			else if ( str.size() == 1 && isalpha(str.at(0)) ) { 	// Case 2:  Writing algebraic expression, starting with a variable
-				char var = str.at(0);		// Set char to single char of str
-				auto search = variable.find(var);	// Search map for char
-				if ( search != variable.end() ) user_error();	// If char doesn't exist, run ERROR
-				else  x.set_value( map[var] );		// Otherwise, set Number x to value of char
+			else if ( str.size() == 1 ) { 	// Case 2:  Writing algebraic expression, starting with a variable
+				var_name = str.at(0);		// Set char to single char of str
+				auto search = variable.find(var_name);	// Search map for char
+				if ( search == variable.end() ) user_error();	// If char does not exist, run ERROR
+				else  x.set_value( variable[var_name] );		// Otherwise, set Number x to value of char
 			}
 			else user_error();
 		}
 		
-		else if ( isdigit(input.at(0) ) { 		// Case 2:  Writing algebraic expression, starting with a number
+		else if ( isdigit(input) ) { 		// Case 2:  Writing algebraic expression, starting with a number
 				cin >> a;
 				if ( a > 255 ) throw_runtime_error("BAD INPUT");
 				x.set_value(a);
