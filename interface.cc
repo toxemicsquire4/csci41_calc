@@ -4,6 +4,7 @@
 #include <map>
 #include <stdexcept>
 #include <exception>
+#include <cmath>
 
 using namespace std;
 
@@ -16,6 +17,13 @@ class Number {		// Class to hold 8 bit numbers
 		void set_value( int new_value ) { value = new_value; }
 };
 
+int add(Number num1, Number num2) {
+	return num1.get_value()+num2.get_value();
+}
+
+int subtract(Number num1, Number num2) {
+	return num1.get_value()-num2.get_value();
+}
 
 void die() { 		// Die function
 	cout << "BAD INPUT\n";
@@ -27,8 +35,8 @@ int main() {
 	map <char, int> var;
 	char var_name, operation, equal;
 	int a, b;
-//	Number x, y;
-	int x, y;	
+	Number x, y;
+//	int x, y;	
 
 while (true) {
 	cin >> ws;
@@ -44,33 +52,27 @@ while (true) {
 				auto search = var.find(var_name);
 				if ( search == var.end() ) cout << die(); // If variable doesn't exist, run ERROR.
 				else {
-				//	y.set_value(var[var_name]);
-					y = var[var_name];
-					var[var_name]+= 1; // Increments value
+					b = var[var_name];
+					y.set_value(b);
+					var[var_name]++; // Increments value
 				}
 			}
 			else if ( isdigit(input) ) {
 				cin >> b; 
 				if (!cin) die();
 				if ( b < 0 || b > 255 ) die();
-				else 
-					y = b;
-					//y.set_value(b);
+				else y.set_value(b);
 			}
-			if ( operation == '+' ) x = x + y;
-				//x.set_value( x.get_value() + y.get_value() );
-			else if ( operation == '-' ) 
-				x = x - y;
-				//x.set_value( x.get_value() - y.get_value() );
-			else if ( operation == '*' );
-			else if ( operation == '/' );
-			else if ( operation == '%' );
-			else if ( operation == '^' );
+			if ( operation == '+' ) x.set_value(add(x, y));
+			else if ( operation == '-' ) x.set_value(subtract(x, y));
+			else if ( operation == '*' ) x.set_value(multiply(x, y));
+			else if ( operation == '/' ) x.set_value(division(x, y));
+			else if ( operation == '%' ) x.set_value(modulate(x, y));
+			else if ( operation == '^' ) x.set_value(exponate(x, y));
 			else die();  // No other operations possible
 			input = cin.peek(); // Checks for end of input... if end, output answer
 			if ( input == '\n' ) {
-				cout << x << endl;
-				//cout << x.get_value() << endl;
+				cout << x.get_value() << endl;
 				break;
 			}
 		}
@@ -92,8 +94,8 @@ while (true) {
 			auto search = var.find(var_name);
 			if ( search == var.end() ) die(); // If variable does not exist, ERROR
 			else { 
-				x = var[var_name];
-				//x.set_value(var[var_name]);
+				a = var[var_name];
+				x.set_value(a);
 				var[var_name]++;
 			}
 		}
@@ -102,9 +104,7 @@ while (true) {
 	else if ( isdigit(input) ) { // If given a digit, will set x.
 		cin >> a;
 		if ( a < 0 || a > 255 ) die();
-		else 
-			x = a;
-			//x.set_value(a);
+		else x.set_value(a);
 	}
 	else die();
 }
