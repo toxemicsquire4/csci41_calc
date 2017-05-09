@@ -88,7 +88,7 @@ while (true) {
 			if ( a < 0 || a > 255 ) die();
 			else var[var_name] = a;
 		}
-		else if ( str == "QUIT" ) die(); // QUIT
+		else if ( str == "QUIT" ) exit(0); // QUIT
 		else if ( str.size() == 1 ) {	// If variable, will set x.
 			var_name = str.at(0);
 			auto search = var.find(var_name);
