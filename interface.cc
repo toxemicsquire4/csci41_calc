@@ -42,7 +42,7 @@ while (true) {
 				cin >> var_name;
 				if (!cin) die();
 				auto search = var.find(var_name);
-				if ( search == var.end() ) cout << "NOT HERE"; // If variable doesn't exist, run ERROR.
+				if ( search == var.end() ) cout << die(); // If variable doesn't exist, run ERROR.
 				else {
 				//	y.set_value(var[var_name]);
 					y = var[var_name];
@@ -81,6 +81,8 @@ while (true) {
 		if ( str == "LET" ) { // If LET, set variable
 			cin >> var_name >> equal >> a;
 			if ( !cin ) die();
+			auto search = var.find(var_name);
+			if ( search != var.end() ) die();  // If variable already exists, run ERROR
 			if ( a < 0 || a > 255 ) die();
 			else var[var_name] = a;
 		}
