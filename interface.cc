@@ -25,7 +25,7 @@ int subtract ( Number x, Number y ) {
 	return x.get_value() - y.get_value();
 }
 
-void die() { 		// Die function
+void user_error() { 		// Die function
 	cout << "INVALID INPUT!\n";
 	exit(0);
 }
@@ -47,9 +47,9 @@ while (true) {
 			input = cin.peek();
 			if ( isalpha(input) ) {	 // If variable, will set y.
 				cin >> var_name;
-				if (!cin) die();
+				if (!cin) user_error();
 				auto search = var.find(var_name);
-				if ( search == var.end() ) die(); // If variable doesn't exist, run ERROR.
+				if ( search == var.end() ) user_error(); // If variable doesn't exist, run ERROR.
 				else {
 					b = var[var_name];
 					y.set_value(b);
@@ -58,20 +58,20 @@ while (true) {
 			}
 			else if ( isdigit(input) ) {
 				cin >> b; 
-				if (!cin) die(); 
+				if (!cin) user_error(); 
 					y.set_value(b);
 			}
-			else die();
+			else user_error();
 			if ( operation == '+' ) add(x, y);
 			else if ( operation == '-' ) subtract(x, y);
 			else if ( operation == '*' ) multiply(x, y);
 			else if ( operation == '/' && y.get_value() != 0 ) division(x, y);
 			else if ( operation == '%' ) modulate(x, y);
 			else if ( operation == '^' ) {
-				if ( x.get_value == 0 && y.get_value == 0 ) die();
+				if ( x.get_value == 0 && y.get_value == 0 ) user_error();
 				else exponate(x, y);
 			}
-			else die();  // No other operations possible
+			else user_error();  // No other operations possible
 			input = cin.peek(); // Checks for end of input... if end, output answer
 			if ( input == '\n' ) {
 				cout << x.get_value() << endl;
@@ -81,21 +81,21 @@ while (true) {
 	}
 	else if ( isalpha(input) ) { // If given a letter, will check for either setting variable or starting equation
 		cin >> str;
-		if ( !cin ) die();
+		if ( !cin ) user_error();
 		if ( str == "LET" ) { // If LET, set variable
 			cin >> var_name >> equal >> a;
-			if ( !cin ) die();
-			if ( equal != '=' ) die();
+			if ( !cin ) user_error();
+			if ( equal != '=' ) user_error();
 			auto search = var.find(var_name);
-			if ( search != var.end() ) die();
-			if ( a < 0 || a > 255 ) die();
+			if ( search != var.end() ) user_error();
+			if ( a < 0 || a > 255 ) user_error();
 			else var[var_name] = a;
 		}
 		else if ( str == "QUIT" ) exit(0); // QUIT
 		else if ( str.size() == 1 ) {	// If variable, will set x.
 			var_name = str.at(0);
 			auto search = var.find(var_name);
-			if ( search == var.end() ) die(); // If variable does not exist, ERROR
+			if ( search == var.end() ) user_error(); // If variable does not exist, ERROR
 			else {
 				a = var[var_name];
 				x.set_value(a);
@@ -106,7 +106,7 @@ while (true) {
 				}
 			}
 		}
-		else die();
+		else user_error();
 	}
 	else if ( isdigit(input) ) { // If given a digit, will set x.
 		cin >> a;
