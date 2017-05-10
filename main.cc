@@ -139,6 +139,10 @@ while (true) {
 	else if ( isdigit(input) ) { // If given a digit, will set x.
 		cin >> a;
 		x.set_value(a);
+		input = cin.peek(); // Checks for end of input... if end, output answer
+		if ( input == '\n' ) {
+			cout << x.get_value() << endl;
+		}
 	}
 	else exit(0);
 }
