@@ -1,4 +1,4 @@
-#include <ctype.h>
+#include <ctype.h>  //Do not USE, Legacy, go to main.cc for full working program
 #include <iostream>
 #include <string>
 #include <map>

@@ -1,2 +1,4 @@
-calc:
-	g++ -std=c++11 Division.cc interface.cc moudulus_exponent.cc Multiplication.cc -o a.out
+main:
+	g++ -std=c++11 main.cc
+clean:
+	rm a.out

@@ -1,4 +1,4 @@
-#include <ctype.h>
+#include <ctype.h> //DO NOT USE, LEGACY, PLESAE USE main.cc
 #include <iostream>
 #include <string>
 #include <map>

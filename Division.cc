@@ -1,4 +1,5 @@
-#include <iostream>
+#include <iostream> //Do NOT USE, LEGACY, please use main.cc
+
 using namespace std;
 //deleted the old version
 

@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //DO NOT USE, LEGACY, use main.cc
 using namespace std;
 
 int multiply(Number num1, Number num2) {

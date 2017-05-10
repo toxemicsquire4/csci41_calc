@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //DO NOT USE LEGACY, use main.cc
 #include <cmath>
 using namespace std;
 

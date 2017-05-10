@@ -1,3 +1,6 @@
+//Elsie Cortez, Omar Radwan, Christian Vaughn, Alex Ku, Jese Hernandez, Kristian Erl
+//Calculator function
+
 #include <ctype.h>
 #include <iostream>
 #include <string>
@@ -17,26 +20,26 @@ class Number {		// Class to hold 8 bit numbers
 		void set_value( int new_value ) { value = new_value; }
 };
 
-int add( Number x, Number y ) {
+int add( Number x, Number y ) {   //add function
 	int num = x.get_value() + y.get_value();
 	return num;
 }
 
-int subtract ( Number x, Number y ) {
+int subtract ( Number x, Number y ) { //subtract function
 	int num = x.get_value() - y.get_value();
 	return num;
 }
 
-int multiply ( Number num1, Number num2 ) {
+int multiply ( Number num1, Number num2 ) {  //multiplication function
 	return num1.get_value() * num2.get_value();
 }
 
-float division ( Number x, Number y ) {
+float division ( Number x, Number y ) {   //division function, checks for 0 later
 	float result = x.get_value() / y.get_value();
 	return result;
 }
 
-int modulate ( Number x, Number y ) {
+int modulate ( Number x, Number y ) { //modulus, checks for 0
 	if ( !y.get_value() ) {
 		cout << "INVALID INPUT!\n";
 		exit(0);
@@ -44,7 +47,7 @@ int modulate ( Number x, Number y ) {
 	else return x.get_value() % y.get_value();
 }
 
-float exponate ( Number x, Number y ) {
+float exponate ( Number x, Number y ) { //exponentiation
 	return pow(x.get_value(), y.get_value());
 }
 	
@@ -54,11 +57,11 @@ void die() { 		// Die function
 }
 	
 int main() {		
-	string str, command, check;
-	map <char, int> var;
+  string str, command, check; //basic things needed for calculator
+  map <char, int> var; //keeps track of variables
 	char var_name, operation, equal;
 	int a, b;
-	Number x, y;	
+	Number x, y;	//objects we will pass to functions
 
 while (true) {
 	cin >> ws;
