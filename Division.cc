@@ -1,5 +1,4 @@
 #include <iostream> //Do NOT USE, LEGACY, please use main.cc
-
 using namespace std;
 
 //This is the working code, or it should be
