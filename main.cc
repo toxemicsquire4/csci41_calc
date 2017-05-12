@@ -35,8 +35,8 @@ int multiply ( Number num1, Number num2 ) {  //multiplication function
 }
 
 float division ( Number x, Number y ) {   //division function, checks for 0 later
-	float result = x.get_value() / y.get_value();
-	return result;
+	float result = x.get_value() / y.get_value(); //divides value of x by the value of y
+	return result; //returns the result of x/y
 }
 
 int modulate ( Number x, Number y ) { //modulus, checks for 0
