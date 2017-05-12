@@ -14,3 +14,4 @@ float exponate(Number& x, Number& y){
 		//No errors to check for
 		return pow(x.get_value(),y.get_value());	
 }
+// xd
